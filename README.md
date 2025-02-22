@@ -35,6 +35,8 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#technical-documentation">Technical Documentation</a></li>
+    <li><a href="#ci-cd">CI/CD</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -154,6 +156,8 @@ to the `Client` class seems like it'll cause unnecessary bloat.
   * [Coverage](https://pypi.org/project/coverage/)
 * Packaging
   * [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+* Documentation
+  * [doxygen](https://www.doxygen.nl/manual/doxygen_usage.html)
 * Pipelines
   * TODO
 
@@ -200,11 +204,32 @@ import sudoblark_python_core
 help(sudoblark_python_core)
 ```
 
+If you need to re-generate documentation locally, simply
+run the following command:
+
+```sh
+doxygen
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- USAGE EXAMPLES -->
 ## Usage
+
+TODO
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- TECHNICAL DOCUMENTATION -->
+## Technical Documentation
+
+TODO
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CI/CD -->
+## CI/CD
 
 TODO
 
