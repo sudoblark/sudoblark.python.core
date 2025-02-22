@@ -2,7 +2,7 @@
 name = "sudoblark-python-core"
 version = "0.1.0"
 description = 'Core library for Sudoblark, primarily as the underlying plumbing for magpie.'
-license = { file = "LICENSE.txt" }
+license = "BSD-3"
 authors = [
     "Ben Clark <bclark@sudoblark.com>"
 ]

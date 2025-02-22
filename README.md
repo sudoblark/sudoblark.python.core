@@ -88,11 +88,15 @@ This does violate the Law of Demeter, and can
 lead to a chain of `getter` methods. 
 
 However, the library intends to wrap primarily around 
-RESTAPIs, wherein object hierarchy is inherently nested.
+RESTAPIs, wherein object hierarchy is inherently nested. It also
+allows for method chaining across certain class structures.
 
 Furthermore, as we anticipate that users may want to perform actions
 at _any point_ in the hierarchy keeping all of this in a single
 interface will lead to quite a bit of bloat in our single class.
+
+The primary user interface is also intended to be [magpie](TODO), wherein
+we may abstract such complications away from the user.
 
 For example, with GitHub this is how we are able to chain
 objects to add a comment on a pull request:
@@ -141,7 +145,17 @@ to the `Client` class seems like it'll cause unnecessary bloat.
 
 ### Built With
 
-TODO
+* Library
+  * [Python 3.10](https://docs.python.org/3.10/)
+* Testing and quality control
+  * [PyTest 7.3](https://docs.pytest.org/en/7.3.x/)
+  * [flake8-pyproject](https://pypi.org/project/Flake8-pyproject/)
+  * [flake8](https://flake8.pycqa.org/en/latest/)
+  * [Coverage](https://pypi.org/project/coverage/)
+* Packaging
+  * [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
+* Pipelines
+  * TODO
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -160,10 +174,32 @@ These installation instructions are targeted for MacOS.
     ```sh
     brew install python@3.10
     ```
+* Poetry
+  ```sh
+  python3.10 -m venv venv
+  source venv/bin/activate
+  pip install -U pip setuptools
+  pip install poetry
+  ```
 
 ### Installation
 
-TODO
+Assume a local virtual environment, and poetry, are setup as per
+the <a href="#prerequisites">Prerequisites</a> then installation
+is simply:
+
+```sh
+poetry install
+```
+
+Which you may verify via:
+
+```sh
+python3
+import sudoblark_python_core
+help(sudoblark_python_core)
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
