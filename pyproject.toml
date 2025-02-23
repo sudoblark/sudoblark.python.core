@@ -13,12 +13,16 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.10.0"
+python = ">=3.10.0,<4.0"
+pydoc-markdown = "^4.8.2"
+novella = "^0.2.6"
+mkdocstrings-python = "^1.16.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = { version = '*' }
 flake8 = { version = "^7.1.1" }
 flake8-pyproject = { version = "^1.2.3" }
+
 
 [build-system]
 requires = ["poetry-core"]

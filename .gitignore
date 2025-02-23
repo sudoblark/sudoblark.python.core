@@ -233,5 +233,5 @@ terraform.rc
 # Temp dev files
 dev_scratchpad/*
 
-# Doxygen content
-docs/doxygen
+# Mkdocs HTML output
+site/
