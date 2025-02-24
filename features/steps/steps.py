@@ -21,6 +21,10 @@ def step_impl(context):
     client = GitHubClient(os.getenv("GITHUB_TOKEN"))
     context.response = client.get_repository(context.repo_owner, context.repo_name)
 
+@when("we use the core library to query for all pull requests")
+def step_impl(context):
+    client = GitHubClient(os.getenv("GITHUB_TOKEN"))
+    context.response = client.get_repository(context.repo_owner, context.repo_name).get_pull_requests(state="all")
 
 @when("we use the core library to query the organisation")
 def step_impl(context):
