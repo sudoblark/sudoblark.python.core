@@ -162,6 +162,10 @@ class IClient(ABC):
             environment_variable: Name of the environment variable to lookup token from
                                   if auth_secret is None
 
+        Raises:
+            ValueError: If unable to determine token from auth_secret or environment_variable.
+
+
         Returns:
             The token to utilise for `self.client` authorisation header
         """
@@ -174,7 +178,7 @@ class IClient(ABC):
                 return_secret = os.getenv(environment_variable)
             else:
                 LOGGER.error("%s environment variable not set and no TOKEN passed through", environment_variable)
-                sys.exit(-1)
+                raise ValueError("%s environment variable not set and no TOKEN passed through", environment_variable)
 
         return return_secret
 

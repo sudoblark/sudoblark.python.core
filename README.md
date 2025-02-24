@@ -36,6 +36,7 @@
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#technical-documentation">Technical Documentation</a></li>
+    <li><a href="#testing">Testing</a></li>
     <li><a href="#cicd">CI/CD</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -59,16 +60,13 @@ before attempting to contribute to this repo.
 * Library
   * [Python 3.10](https://docs.python.org/3.10/)
 * Testing and quality control
-  * [PyTest 7.3](https://docs.pytest.org/en/7.3.x/)
   * [flake8-pyproject](https://pypi.org/project/Flake8-pyproject/)
   * [flake8](https://flake8.pycqa.org/en/latest/)
-  * [Coverage](https://pypi.org/project/coverage/)
+  * [behave!](https://behave.readthedocs.io/en/latest/)
 * Packaging
   * [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 * Documentation
   * [mkdocstrings-python](https://mkdocstrings.github.io/python/)
-* Pipelines
-  * TODO
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -113,13 +111,6 @@ import sudoblark_python_core
 help(sudoblark_python_core)
 ```
 
-If you need to re-generate documentation locally, simply
-run the following command:
-
-```sh
-doxygen
-```
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -149,10 +140,33 @@ unless you want to compile a local version of the docs for yourself.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- Testing -->
+## Testing
+
+The Behave! library is utilised in order to conduct end-to-end testing, hopefully proving
+we can actually interact in a reliable fashion with the GitHub RESTAPI.
+
+For those uninitiated, the basic premise is:
+- The [features](features) folder is the root of Behave!
+- At this top-level, it contains `.feature` files, which are used to define our test cases
+- In the nested `steps` folder, we will define what the test case components mean in programmatic terms
+
+Checks may be run by simply executing `behave` locally once the `Installation` steps have been followed.
+
+> **_NOTE:_**  All scenarios require a valid GITHUB_TOKEN environment variable to be present
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- CI/CD -->
 ## CI/CD
 
-TODO
+GitHub Actions is used for all CI/CD activities. We give a brief outline of what
+each pipeline does below.
+
+| Pipeline                    | Triggers                 | Description                       |
+|-----------------------------|--------------------------|-----------------------------------|
+| commit-to-pull-request.yaml | Commit on a pull request | Runs flake8 and behavioural tests |
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
