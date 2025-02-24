@@ -49,6 +49,7 @@ class Repository:
                 pull_requests.append(
                     PullRequest(
                         identifier=pull_request["id"],
+                        number=pull_request["number"],
                         client=self.client,
                         base_url=pull_request["url"],
                         title=pull_request["title"],
@@ -80,11 +81,12 @@ class Repository:
         if github_restapi_request.status_code == 200:
             pull_request = PullRequest(
                 identifier=response_data["id"],
+                number=response_data["number"],
                 client=self.client,
                 base_url=response_data["url"],
                 title=response_data["title"],
                 repo=self.full_name,
-                state=pull_request["state"],
+                state=response_data["state"],
             )
         return pull_request
 

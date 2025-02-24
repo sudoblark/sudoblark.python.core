@@ -52,6 +52,15 @@ for request in repository.get_pull_requests("all"):
     print(request)
 ```
 
+## Get all comments on a given pull request
+```python
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+pull_request = client.get_repository("vexx32", "PSKoans").get_pull_request(241)
+for comment in pull_request.get_comments():
+    print(comment)
+```
+
 ## Interaction with pull requests within a CI/CD environment
 Given the intended operation within CI/CD environments, there are some
 examples below for how to use these classes to interact with pull requests
