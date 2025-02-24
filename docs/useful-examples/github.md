@@ -42,10 +42,14 @@ client = GitHubClient()
 print(client.get_repository("sudoblark", "sudoblark.terraform.github"))
 ```
 
-## Get all pull requests of a certain state
+## Get all pull requests for a given repository
 
 ```python
-TODO - need to test, currently broke for org repos for some reason
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+repository = client.get_repository("sudoblark", "sudoblark.terraform.github")
+for request in repository.get_pull_requests("all"):
+    print(request)
 ```
 
 ## Comment on a pull request

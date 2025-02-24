@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from requests import Session
 from sudoblark_python_core.github.pull_request import PullRequest
+from sudoblark_python_core.github.pull_request import PullRequestState
 from typing import List
 from typing import Union
 
@@ -24,12 +25,15 @@ class Repository:
     full_name: str
     private: bool
 
-    def get_pull_requests(self) -> List[PullRequest]:
+    def get_pull_requests(self, state: PullRequestState = "open") -> List[PullRequest]:
         """
         Examples:
             ```python
             get_pull_requests()
             ```
+
+        Args:
+            state: Filter retrieve requests to be of this state
 
         Returns:
             All PullRequests for the Repository, empty if none found \
@@ -37,7 +41,8 @@ class Repository:
         """
         pull_requests: List[PullRequest] = []
         github_restapi_request = self.client.get(
-            url=f"{self.base_url}/pulls"
+            url=f"{self.base_url}/pulls",
+            params={"state": state},
         )
         if github_restapi_request.status_code == 200:
             for pull_request in github_restapi_request.json():

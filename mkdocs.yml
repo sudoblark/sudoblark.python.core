@@ -22,6 +22,7 @@ nav:
         - "Client": 'known-interfaces/github/client.md'
         - "Organisation": 'known-interfaces/github/organisation.md'
         - "Repository": 'known-interfaces/github/repository.md'
+        - "Pull Requests": 'known-interfaces/github/pull-request.md'
 
 plugins:
 - mkdocstrings:
@@ -34,3 +35,4 @@ plugins:
           docstring_style: google
           ignore_init_summary: false
           merge_init_into_class: false
+          show_root_toc_entry: false

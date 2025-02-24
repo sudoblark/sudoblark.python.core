@@ -5,7 +5,7 @@
 > 
 > Once generated, you may base64 encode it however you wish. However, it should be noted
 > that such tokens need to be treated with the upmost secrecy. If you are using
-> this library via GitHub Actions it is thus recommended to either:
+> this library via GitHub Actions it is thus recommended instead to:
 > 
 >   - Auto-generate a limited access token as per the [docs](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication)
 >   - Use [JWT](https://docs.github.com/en/apps/creating-github-apps/authenticating-with-a-github-app/generating-a-json-web-token-jwt-for-a-github-app) to generate a limited access token

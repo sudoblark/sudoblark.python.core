@@ -1,8 +1,19 @@
 import enum
 from dataclasses import dataclass
 from requests import Session
-from typing import Literal
 
+
+class PullRequestState(enum.Enum):
+    """Valid pull request states.
+
+    Attributes:
+        open (str): Open pull request
+        closed (str): Closed pull request
+        all (str): Any pull request
+    """
+    open = "open"
+    closed = "closed"
+    all = "all"
 
 @dataclass
 class PullRequest:
@@ -17,14 +28,14 @@ class PullRequest:
         base_url (str): Base URL we should use for querying the RESTAPI within the context of the PullRequest
         title (str): Title given to the PullRequest
         repo (str): Name of the Repository which the instance is associated with
-        state Literal["open", "closed"]: State of the pull request
+        state (PullRequestState): State of the pull request
     """
     identifier: int
     client: Session
     base_url: str
     title: str
     repo: str
-    state: Literal["open", "closed"]
+    state: PullRequestState
 
     def __str__(self) -> str:
         """
