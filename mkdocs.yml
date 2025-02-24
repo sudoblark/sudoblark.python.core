@@ -16,7 +16,9 @@ nav:
     - "Operating Principles": 'developers-notes/operating-principles.md'
     - "Style Guide": "developers-notes/style-guide.md"
   - "Known Interfaces":
-      - "GitHub": 'known-interfaces/github.md'
+      - "GitHub":
+        - "Client": 'known-interfaces/github/client.md'
+        - "Organisation":  'known-interfaces/github/organisation.md'
 
 plugins:
 - mkdocstrings:
@@ -25,4 +27,7 @@ plugins:
         paths: [.]
         options:
           show_bases: true
-          show_source: true
+          show_source: false
+          docstring_style: google
+          ignore_init_summary: false
+          merge_init_into_class: false

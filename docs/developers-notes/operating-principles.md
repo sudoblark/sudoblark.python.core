@@ -35,6 +35,22 @@ objects to add a comment on a pull request:
 
 ![GitHub Example](./github-example.png)
 
+Which translates to:
+
+```python
+from sudoblark_python_core import GitHubClient
+
+client = GitHubClient()
+sudoblark = client.get_organisation("sudoblark")
+sudoblark_python_core_repo = sudoblark.get_repository("sudoblark.python.core")
+```
+
+Or, with method chaining:
+```python
+from sudoblark_python_core import GitHubClient
+GitHubClient().get_organisation("sudoblark").get_repository("sudoblark.python.core")
+```
+
 Which, whilst a tad complicate, eases implementation as each
 class just deals with its own concerns. Users may want to do other things,
 such as create files on `Repository`, delete a `Comment` instance
