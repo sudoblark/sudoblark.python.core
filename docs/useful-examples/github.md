@@ -5,9 +5,9 @@ examples should work just fine.
 For more information on why this is required, and how to generate such a 
 token, see [GitHubClient](../known-interfaces/github/client.md) documentation.
 
+## Repositories
 
-
-## Get all repositories in an organisation
+### Get all repositories in an organisation
 ```python
 from sudoblark_python_core import GitHubClient
 client = GitHubClient()
@@ -15,7 +15,7 @@ for repository in client.get_organisation("sudoblark").get_repositories():
     print(repository)
 ```
 
-## Get a personal repository:
+### Get a personal repository:
 
 ```python
 from sudoblark_python_core import GitHubClient
@@ -23,7 +23,7 @@ client = GitHubClient()
 print(client.get_repository("benjaminlukeclark", "Get-Duplicate-Files"))
 ```
 
-## Get a repository in an organisation
+### Get a repository in an organisation
 
 * Either traverse via the Organisation instance:
 
@@ -41,8 +41,9 @@ from sudoblark_python_core import GitHubClient
 client = GitHubClient()
 print(client.get_repository("sudoblark", "sudoblark.terraform.github"))
 ```
+## Pull Requests
 
-## Get all pull requests for a given repository
+### Get all pull requests for a given repository
 
 ```python
 from sudoblark_python_core import GitHubClient
@@ -52,7 +53,9 @@ for request in repository.get_pull_requests("all"):
     print(request)
 ```
 
-## Get all comments on a given pull request
+## Comments
+
+### Get all comments on a given pull request
 ```python
 from sudoblark_python_core import GitHubClient
 client = GitHubClient()
@@ -61,13 +64,73 @@ for comment in pull_request.get_comments():
     print(comment)
 ```
 
-## Post a comment on a given pull request
+### Post a comment on a given pull request
 ```python
 from sudoblark_python_core import GitHubClient
 client = GitHubClient()
 pull_request = client.get_repository("sudoblark", "sudoblark.python.core").get_pull_request(3)
 body = "Open the pod bay doors hal."
 pull_request.post_comment(body)
+```
+
+![New Comment](./github/new_comment.png)
+
+### Update the last comment from a given user
+```python
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+pull_request = client.get_repository("sudoblark", "sudoblark.python.core").get_pull_request(3)
+comments = pull_request.get_comments()
+
+found = False
+new_body = "\n\nI'm sorry Dave, I'm afraid I can't do that"
+intended_author = "sudoblark-bot"
+
+while not found and len(comments) > 0:
+    comment = comments.pop()
+    if comment.author == intended_author:
+        comment.update(new_body)
+        found = True
+```
+
+![Updated comment](./github/updated_comment.png)
+
+### Overwrite the last comment from a given user
+```python
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+pull_request = client.get_repository("sudoblark", "sudoblark.python.core").get_pull_request(3)
+comments = pull_request.get_comments()
+
+found = False
+new_body = "What the heck is going on here lads"
+intended_author = "sudoblark-bot"
+
+while not found and len(comments) > 0:
+    comment = comments.pop()
+    if comment.author == intended_author:
+        comment.overwrite(new_body)
+        found = True
+```
+
+![Overwritten comment](./github/overwritten_comment.png)
+
+### Delete the last comment from a given user
+```python
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+pull_request = client.get_repository("sudoblark", "sudoblark.python.core").get_pull_request(3)
+comments = pull_request.get_comments()
+
+found = False
+new_body = "What the heck is going on here lads"
+intended_author = "sudoblark-bot"
+
+while not found and len(comments) > 0:
+    comment = comments.pop()
+    if comment.author == intended_author:
+        comment.delete()
+        found = True
 ```
 
 ## Interaction with pull requests within a CI/CD environment

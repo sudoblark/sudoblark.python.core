@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from requests import Session
-from typing import Literal
+from requests import Response
+import json
 
 from sudoblark_python_core.github import pull_request
 
@@ -30,15 +31,63 @@ class Comment:
     pull_request: bool
     issue: bool
     body: str
+    author: str
 
     def update(self, body: str) -> bool:
-        pass
+        """
+        Args:
+            body (str): Additional content to append to the existing comment body.
+
+        Returns:
+            True if appended, else False.
+        """
+        updated: bool = False
+
+        github_restapi_request: Response = self.client.patch(
+            url=self.base_url,
+            data=json.dumps({"body": self.body + body}),
+        )
+        if github_restapi_request.status_code == 201:
+            response_data: dict = github_restapi_request.json()
+            self.body = response_data["body"]
+            self.author = response_data["user"]["login"]
+            updated = True
+        return updated
 
     def overwrite(self, body: str) -> bool:
-        pass
+        """
+        Args:
+            body (str): Content to overwrite the existing comment body with.
 
-    def delete(self):
-        pass
+        Returns:
+            True if overwritten, else False.
+        """
+        updated: bool = False
+
+        github_restapi_request: Response = self.client.patch(
+            url=self.base_url,
+            data=json.dumps({"body": body}),
+        )
+        if github_restapi_request.status_code == 201:
+            response_data: dict = github_restapi_request.json()
+            self.body = response_data["body"]
+            self.author = response_data["user"]["login"]
+            updated = True
+        return updated
+
+    def delete(self) -> bool:
+        """
+        Returns:
+            True if deleted, else False.
+        """
+        deleted: bool = False
+
+        github_restapi_request: Response = self.client.delete(
+            url=self.base_url
+        )
+        if github_restapi_request.status_code == 201:
+            deleted = True
+        return deleted
 
     def __str__(self) -> str:
         """

@@ -76,7 +76,9 @@ class PullRequest:
                         parent_identifier=self.number,
                         repository_name=self.repo,
                         pull_request=True,
-                        issue=False
+                        issue=False,
+                        body=comment["body"],
+                        author=comment["user"]["login"],
                     )
                 )
         return comments
@@ -89,9 +91,9 @@ class PullRequest:
         Returns:
             Comment instance if successfully posted, else None
         """
-        comment = None
+        comment: Union[Comment, None] = None
 
-        github_restapi_request = self.client.post(
+        github_restapi_request: Response = self.client.post(
             url=self.comment_url,
             data=json.dumps({"body": body}),
         )
@@ -106,11 +108,9 @@ class PullRequest:
                 pull_request=True,
                 issue=False,
                 body=response_data["body"],
+                author=response_data["user"]["login"],
             )
         return comment
-
-
-
 
     def __str__(self) -> str:
         """

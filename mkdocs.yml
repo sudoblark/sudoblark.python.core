@@ -22,7 +22,8 @@ nav:
         - "Client": 'known-interfaces/github/client.md'
         - "Organisation": 'known-interfaces/github/organisation.md'
         - "Repository": 'known-interfaces/github/repository.md'
-        - "Pull Request": 'known-interfaces/github/pull-request.md'
+        - "PullRequest": 'known-interfaces/github/pull-request.md'
+        - "PullRequestState": 'known-interfaces/github/pull-request-state.md'
         - "Comment": 'known-interfaces/github/comment.md'
 
 plugins:
