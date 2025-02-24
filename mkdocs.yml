@@ -37,4 +37,3 @@ plugins:
           docstring_style: google
           ignore_init_summary: false
           merge_init_into_class: false
-          show_root_toc_entry: false
