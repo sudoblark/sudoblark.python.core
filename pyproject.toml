@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "sudoblark-python-core"
-version = "0.1.0"
-description = 'Core library for Sudoblark, primarily as the underlying plumbing for magpie.'
+version = "1.0.0"
+description = 'Core python library for Sudoblark.'
 license = "BSD-3"
 authors = [
     "Ben Clark <bclark@sudoblark.com>"

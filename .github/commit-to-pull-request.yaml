@@ -1,0 +1,55 @@
+name: Python quality checks on pull request
+
+env:
+  # Automatically generated token unique to this repo per workflow execution
+  REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Explicitly provided token in ORG to access entire organisation
+  ORG_GITHUB_TOKEN: ${{ secrets.SUDOBLARK_GITHUB_TOKEN }}
+
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  bootstrapComment:
+    name: Bootstrap PR comment
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        env:
+          GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
+
+      - name: Create venv
+        run: |
+          python3.10 -m venv workflow_venv
+        shell: bash
+
+      - name: Install poetry
+        run: |
+          source venv/bin/activate
+          pip install -U pip setuptools
+          pip install poetry
+        shell: bash
+
+      - name: Install sudoblark_python_core
+        run: |
+          source workflow_venv/bin/activate
+          poetry install
+        shell: bash
+
+      - name: Create comment base
+        run: |
+          content=content.txt
+          touch $content
+    
+          echo "# Python quality checks below" >> $content
+        shell: bash
+
+      - name: Comment on PR
+        run: |
+          source workflow_venv/bin/activate
+          cd .github
+          python3 -m new-comment
+        shell: bash
