@@ -15,12 +15,12 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.10.0,<4.0"
 requests = { version = "^2.32.3" }
-behave = "^1.2.6"
 
 [tool.poetry.group.test.dependencies]
 pytest = { version = '*' }
 flake8 = { version = "^7.1.1" }
 flake8-pyproject = { version = "^1.2.3" }
+behave = {version = "^1.2.6"}
 
 [tool.poetry.group. documentation.dependencies]
 mkdocstrings-python = { version = "^1.16.1" }

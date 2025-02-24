@@ -1,9 +1,9 @@
 # Usage
 
-Simply install the package from TBC:
+Simply install the package from PyPI:
 
 ```sh
-TODO
+pip install sudoblark_python_core
 ```
 
 Once installed, import your required interface(s) and go from there.

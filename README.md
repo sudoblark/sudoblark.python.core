@@ -37,6 +37,7 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#technical-documentation">Technical Documentation</a></li>
     <li><a href="#testing">Testing</a></li>
+    <li><a href="#packaging">Packaging</a></li>
     <li><a href="#cicd">CI/CD</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -49,7 +50,7 @@
 This is the core Python library for Sudoblark, mainly used to power CLI tooling
 to augment CI/CD operations.
 
-The live source of documentation may be said to reside [here](). It
+The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/). It
 is recommended for developers to at least read the "Developers notes" section
 before attempting to contribute to this repo.
 
@@ -117,7 +118,13 @@ help(sudoblark_python_core)
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-TODO
+Intall from PyPi:
+
+```shell
+pip install sudoblark-python-core
+```
+
+And off you go. More details are available [here](https://sudoblark.github.io/sudoblark.python.core/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -134,9 +141,8 @@ In order to generation a local web server of documentation:
 mkdocs serve
 ```
 
-However, it should be noted that versioned documentation is automatically produced -
-and made publicly available - via [CI/CD](#cicd). So there's no need for you to do this
-unless you want to compile a local version of the docs for yourself.
+However, it should be noted that live versioned documentation is produced during
+the release process by an admin running the `mkdocs gh-deploy --force` command.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -154,6 +160,19 @@ For those uninitiated, the basic premise is:
 Checks may be run by simply executing `behave` locally once the `Installation` steps have been followed.
 
 > **_NOTE:_**  All scenarios require a valid GITHUB_TOKEN environment variable to be present
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Packaging -->
+## Packaging
+
+The package is published to PyPi simply by running the below commands:
+
+```shell
+poetry build
+poetry config pypi-token.pypi <token>
+poetry publish
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
