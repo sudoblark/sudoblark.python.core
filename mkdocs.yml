@@ -1,0 +1,39 @@
+site_name: The core Python library for Sudoblark
+repo_name: sudoblark/sudoblark_python_core
+site_url: https://github.com/sudoblark/sudoblark.python.core
+site_author: Benjamin Clark
+site_description: ->
+  This is the core Python library for Sudoblark, mainly used to power [magpie]() - a CLI tooling
+  intended to augment CI/CD operations.
+copyright: BSD-3
+site_dir: site
+docs_dir: docs
+theme: readthedocs
+nav:
+  - "Home": 'index.md'
+  - "Usage": 'usage.md'
+  - "Developers Notes":
+    - "Operating Principles": 'developers-notes/operating-principles.md'
+    - "Style Guide": "developers-notes/style-guide.md"
+  - "Useful Examples":
+      - "GitHub": "useful-examples/github.md"
+  - "Known Interfaces":
+      - "GitHub":
+        - "Client": 'known-interfaces/github/client.md'
+        - "Organisation": 'known-interfaces/github/organisation.md'
+        - "Repository": 'known-interfaces/github/repository.md'
+        - "PullRequest": 'known-interfaces/github/pull-request.md'
+        - "PullRequestState": 'known-interfaces/github/pull-request-state.md'
+        - "Comment": 'known-interfaces/github/comment.md'
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        paths: [.]
+        options:
+          show_bases: true
+          show_source: false
+          docstring_style: google
+          ignore_init_summary: false
+          merge_init_into_class: false

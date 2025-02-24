@@ -1,0 +1,61 @@
+name: Python quality checks on pull request
+
+env:
+  # Automatically generated token unique to this repo per workflow execution
+  REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Explicitly provided token in ORG to access entire organisation
+  ORG_GITHUB_TOKEN: ${{ secrets.SUDOBLARK_GITHUB_TOKEN }}
+
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  flake8_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.7.4
+          architecture: x64
+      - name: Install flake8
+        run: pip install flake8
+      - name: Run flake8
+        uses: suo/flake8-github-action@releases/v1
+        with:
+          checkName: 'flake8_checks'
+        env:
+          GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
+
+  behave_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        env:
+          GITHUB_TOKEN: REPO_GITHUB_TOKEN
+        with:
+          python-version: 3.10.0
+      - name: Setup venv
+        run: |
+          python3 -m venv venv
+        shell: bash
+
+      - name: Install poetry
+        run: |
+          source venv/bin/activate
+          pip install -U pip setuptools
+          pip install poetry
+        shell: bash
+
+      - name: Run behave
+        run: |
+          source venv/bin/activate
+          behave
+        env:
+          GITHUB_TOKEN: ORG_GITHUB_TOKEN
+        shell: bash
