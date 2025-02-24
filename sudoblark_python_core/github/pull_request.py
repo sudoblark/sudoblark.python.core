@@ -1,9 +1,11 @@
 import enum
 from dataclasses import dataclass
 from requests import Session
+from requests import Response
 from sudoblark_python_core.github.comments import Comment
 from typing import List
 from typing import Union
+import json
 
 
 class PullRequestState(enum.Enum):
@@ -62,9 +64,10 @@ class PullRequest:
             or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
         """
         comments: List[Comment] = []
-        github_restapi_request = self.client.get(url=self.comment_url)
+        github_restapi_request: Response = self.client.get(url=self.comment_url)
         if github_restapi_request.status_code == 200:
-            for comment in github_restapi_request.json():
+            response_data = github_restapi_request.json()
+            for comment in response_data:
                 comments.append(
                     Comment(
                         identifier=comment["id"],
@@ -83,17 +86,17 @@ class PullRequest:
         Args:
             body (str): Body of the comment to post to the PullRequest
 
-        Return:
+        Returns:
             Comment instance if successfully posted, else None
         """
         comment = None
 
         github_restapi_request = self.client.post(
             url=self.comment_url,
-            body={"body": body},
+            data=json.dumps({"body": body}),
         )
-        response_data = github_restapi_request.json()
-        if github_restapi_request.status_code == 200:
+        if github_restapi_request.status_code == 201:
+            response_data: dict = github_restapi_request.json()
             comment = Comment(
                 identifier=response_data["id"],
                 client=self.client,

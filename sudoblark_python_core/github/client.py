@@ -7,6 +7,7 @@ from sudoblark_python_core.github.organisation import Organisation
 from sudoblark_python_core.github.repository import Repository
 from typing import Union
 from typing import List
+from requests import Response
 
 
 class Client(IClient):
@@ -77,11 +78,11 @@ class Client(IClient):
         """
         repository: Union[None, Repository] = None
 
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self._get_base_url()}/repos/{owner}/{name}"
         )
-        response_data = github_restapi_request.json()
         if github_restapi_request.status_code == 200:
+            response_data: dict = github_restapi_request.json()
             repository = Repository(
                 identifier=response_data["id"],
                 client=self.client,
@@ -103,11 +104,12 @@ class Client(IClient):
             or instance otherwise doesn't have access or fails to query the RESTAPI.
         """
         organisations: List[Organisation] = []
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self._get_base_url()}/organizations"
         )
         if github_restapi_request.status_code == 200:
-            for organisation in github_restapi_request.json():
+            response_data: dict = github_restapi_request.json()
+            for organisation in response_data:
                 organisations.append(
                     Organisation(
                         identifier=organisation["id"],
@@ -134,11 +136,11 @@ class Client(IClient):
         """
         organisation: Union[None, Organisation] = None
 
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self._get_base_url()}/orgs/{name}"
         )
         if github_restapi_request.status_code == 200:
-            response_data = github_restapi_request.json()
+            response_data: dict = github_restapi_request.json()
             organisation = Organisation(
                 identifier=response_data["id"],
                 company=response_data["login"],

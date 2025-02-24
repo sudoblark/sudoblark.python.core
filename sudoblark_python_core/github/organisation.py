@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from requests import Session
+from requests import Response
 from typing import List
 from typing import Union
 
@@ -42,13 +43,13 @@ class Organisation:
         """
         repository: Union[None, Repository] = None
 
-        base_github_api_url = self.base_url.split("/orgs")[0]
+        base_github_api_url: str = self.base_url.split("/orgs")[0]
 
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{base_github_api_url}/repos/{self.company}/{name}"
         )
-        response_data = github_restapi_request.json()
         if github_restapi_request.status_code == 200:
+            response_data: dict = github_restapi_request.json()
             repository = Repository(
                 identifier=response_data["id"],
                 client=self.client,
@@ -70,11 +71,12 @@ class Organisation:
             or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
         """
         repositories: List[Repository] = []
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self.base_url}/repos"
         )
         if github_restapi_request.status_code == 200:
-            for repository in github_restapi_request.json():
+            response_data: dict = github_restapi_request.json()
+            for repository in response_data:
                 repositories.append(
                     Repository(
                         identifier=repository["id"],

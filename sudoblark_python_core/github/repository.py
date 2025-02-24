@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from requests import Session
+from requests import Response
 from sudoblark_python_core.github.pull_request import PullRequest
 from sudoblark_python_core.github.pull_request import PullRequestState
 from typing import List
@@ -40,12 +41,13 @@ class Repository:
             or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
         """
         pull_requests: List[PullRequest] = []
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self.base_url}/pulls",
             params={"state": state},
         )
         if github_restapi_request.status_code == 200:
-            for pull_request in github_restapi_request.json():
+            response_data = github_restapi_request.json()
+            for pull_request in response_data:
                 pull_requests.append(
                     PullRequest(
                         identifier=pull_request["id"],
@@ -74,11 +76,11 @@ class Repository:
         """
         pull_request: Union[None, PullRequest] = None
 
-        github_restapi_request = self.client.get(
+        github_restapi_request: Response = self.client.get(
             url=f"{self.base_url}/pulls/{identifier}"
         )
-        response_data = github_restapi_request.json()
         if github_restapi_request.status_code == 200:
+            response_data: dict = github_restapi_request.json()
             pull_request = PullRequest(
                 identifier=response_data["id"],
                 number=response_data["number"],

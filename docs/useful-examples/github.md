@@ -61,6 +61,15 @@ for comment in pull_request.get_comments():
     print(comment)
 ```
 
+## Post a comment on a given pull request
+```python
+from sudoblark_python_core import GitHubClient
+client = GitHubClient()
+pull_request = client.get_repository("sudoblark", "sudoblark.python.core").get_pull_request(3)
+body = "Open the pod bay doors hal."
+pull_request.post_comment(body)
+```
+
 ## Interaction with pull requests within a CI/CD environment
 Given the intended operation within CI/CD environments, there are some
 examples below for how to use these classes to interact with pull requests
