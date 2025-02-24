@@ -16,7 +16,7 @@ class Organisation:
         identifier (int): Unique identifier of the organisation within GitHub
         company (str): The company associated with the organisation
         repos_url (str): RESTAPI endpoint for retrieval of repos in the organisation
-        client (requests.Session): Session used to make requests to the RESTful API, intended
+        client (requests.Session): Session used to make requests to the RESTAPI, intended
                           to be passed in when instance is created via Client
         base_url (str): Base URL we should use for querying the RESTAPI within the context of the organisation
 

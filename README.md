@@ -8,7 +8,7 @@
 <h3 align="center">sudoblark.python.core</h3>
 
   <p align="center">
-    The core Python library for Sudoblark, mainly used to power <a href="todo">magpie</a>
+    The core Python library for Sudoblark, mainly used to power CLI tooling to augment CI/CD operations.
     <br>
     &middot;
     <a href="https://github.com/sudoblark/sudoblark.python.core/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
@@ -45,8 +45,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is the core Python library for Sudoblark, mainly used to power [magpie]() - a CLI tooling
-intended to augment CI/CD operations.
+This is the core Python library for Sudoblark, mainly used to power CLI tooling
+to augment CI/CD operations.
 
 The live source of documentation may be said to reside [here](). It
 is recommended for developers to at least read the "Developers notes" section

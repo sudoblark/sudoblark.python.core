@@ -1,5 +1,8 @@
 from dataclasses import dataclass
 from requests import Session
+from sudoblark_python_core.github.pull_request import PullRequest
+from typing import List
+from typing import Union
 
 @dataclass
 class Repository:
@@ -9,7 +12,7 @@ class Repository:
 
     Attributes:
         identifier (int): Unique identifier of the Repository
-        client (requests.Session): Session used to make requests to the RESTful API, intended
+        client (requests.Session): Session used to make requests to the RESTAPI, intended
                           to be passed in when instance is created via Client/Organisation
         base_url (str): Base URL we should use for querying the RESTAPI within the context of the Repository
         full_name (str): Full name of the Repository, in the form of owner/repository
@@ -20,6 +23,65 @@ class Repository:
     base_url: str
     full_name: str
     private: bool
+
+    def get_pull_requests(self) -> List[PullRequest]:
+        """
+        Examples:
+            ```python
+            get_pull_requests()
+            ```
+
+        Returns:
+            All PullRequests for the Repository, empty if none found \
+            or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
+        """
+        pull_requests: List[PullRequest] = []
+        github_restapi_request = self.client.get(
+            url=f"{self.base_url}/pulls"
+        )
+        if github_restapi_request.status_code == 200:
+            for pull_request in github_restapi_request.json():
+                pull_requests.append(
+                    PullRequest(
+                        identifier=pull_request["id"],
+                        client=self.client,
+                        base_url=pull_request["url"],
+                        title=pull_request["title"],
+                        repo=self.full_name,
+                        state=pull_request["state"],
+                    )
+                )
+        return pull_requests
+
+    def get_pull_request(self, identifier: int) -> Union[PullRequest, None]:
+        """
+        Args:
+            identifier: The ID of the pull request we are querying for
+
+        Examples:
+            ```python
+            get_pull_request(22)
+            ```
+
+        Returns:
+            PullRequest instance if found, else None
+        """
+        pull_request: Union[None, PullRequest] = None
+
+        github_restapi_request = self.client.get(
+            url=f"{self.base_url}/pulls/{identifier}"
+        )
+        response_data = github_restapi_request.json()
+        if github_restapi_request.status_code == 200:
+            pull_request = PullRequest(
+                identifier=response_data["id"],
+                client=self.client,
+                base_url=response_data["url"],
+                title=response_data["title"],
+                repo=self.full_name,
+                state=pull_request["state"],
+            )
+        return pull_request
 
     def __str__(self) -> str:
         """
