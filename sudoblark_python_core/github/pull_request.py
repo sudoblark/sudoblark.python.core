@@ -78,8 +78,36 @@ class PullRequest:
                 )
         return comments
 
-    def post_comment(self):
-        pass
+    def post_comment(self, body: str) -> Union[Comment, None]:
+        """
+        Args:
+            body (str): Body of the comment to post to the PullRequest
+
+        Return:
+            Comment instance if successfully posted, else None
+        """
+        comment = None
+
+        github_restapi_request = self.client.post(
+            url=self.comment_url,
+            body={"body": body},
+        )
+        response_data = github_restapi_request.json()
+        if github_restapi_request.status_code == 200:
+            comment = Comment(
+                identifier=response_data["id"],
+                client=self.client,
+                base_url=response_data["url"],
+                parent_identifier=self.number,
+                repository_name=self.repo,
+                pull_request=True,
+                issue=False,
+                body=response_data["body"],
+            )
+        return comment
+
+
+
 
     def __str__(self) -> str:
         """

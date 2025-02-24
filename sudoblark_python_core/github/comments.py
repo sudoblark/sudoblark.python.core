@@ -33,10 +33,13 @@ class Comment:
 
     def update(self, body: str) -> bool:
         pass
+
     def overwrite(self, body: str) -> bool:
         pass
+
     def delete(self):
         pass
+
     def __str__(self) -> str:
         """
         Returns:
