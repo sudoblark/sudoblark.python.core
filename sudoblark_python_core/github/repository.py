@@ -33,7 +33,7 @@ class Repository:
             ```
 
         Args:
-            state: Filter retrieve requests to be of this state
+            state: Filter PullRequest instances to be of this state
 
         Returns:
             All PullRequests for the Repository, empty if none found \

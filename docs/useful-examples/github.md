@@ -1,4 +1,4 @@
-# GitHubClient
+# GitHubClient useful examples
 Once a `GITHUB_TOKEN` is present in your environment variables, the below
 examples should work just fine.
 
@@ -52,9 +52,9 @@ for request in repository.get_pull_requests("all"):
     print(request)
 ```
 
-## Comment on a pull request
+## Interaction with pull requests within a CI/CD environment
 Given the intended operation within CI/CD environments, there are some
-examples below for how to use these classes to comment on pull requests
+examples below for how to use these classes to interact with pull requests
 in the simplest manner possible.
 
 This all follow two assumptions:
@@ -68,12 +68,24 @@ This all follow two assumptions:
 >   * Present on a personal GitHub account
 >   * Stored within an Organisation
 
-### GitHub Actions
-GitHub actions pre-populates certain environment variables, an extensive
-list of which is available via their own [docs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables).
+All of these examples essentially rely upon the fact that most CI/CD systems out
+there prepopulate information in the build with contextual information. Said contextual
+information can be used to discover the pull request associated with the build
+with relative ease. The docs regarding what values are prepopulated, and how,
+have been linked below for reference.
 
-Assuming a build has been triggered by a commit to a pull request, we have all the contextual information
-required in order to post a comment to the trigger pull request.
+| Platform               | Docs                                                                                                                         | Syntax                                                                                                                                     |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| GitHub Actions         | [docs](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables) | Grab via environment variables                                                                                                             |
+| Azure DevOps pipelines | [docs](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml)                 | Reference via `"$(VAR_NAME)"` directly in script, or <br/>add to the `env` block of you task to <br/>reference via an environment variable |
+| CircleCI               | [docs](https://circleci.com/docs/variables/#built-in-environment-variables)                                                  | Reference via environment variables                                                                                                        |
+
+
+### Adding a new comment
+
+<details close>
+<summary>GitHub Actions</summary>
+<br>
 
 ```python
 import os
@@ -93,12 +105,12 @@ with open("./file.md", "r") as file:
 pull_request.post_comment(content)
 ```
 
-### Azure DevOps Pipelines
-Azure DevOps pipelines pre-populates certain environment variables, an extensive
-list of which is available via their own [docs](https://learn.microsoft.com/en-us/azure/devops/pipelines/build/variables?view=azure-devops&tabs=yaml).
+</details>
+<br>
 
-Assuming a build has been triggered by a commit to a pull request, we have all the contextual information
-required in order to post a comment to the trigger pull request.
+<details close>
+<summary>Azure DevOps pipelines</summary>
+<br>
 
 ```python
 from sudoblark_python_core import GitHubClient
@@ -117,12 +129,12 @@ with open("./file.md", "r") as file:
 pull_request.post_comment(content)
 ```
 
-### CircleCI
-CircleCI pre-populates certain environment variables, an extensive
-list of which is available via their own [docs](https://circleci.com/docs/variables/#built-in-environment-variables).
+</details>
+<br>
 
-Assuming a build has been triggered by a commit to a pull request, we have all the contextual information
-required in order to post a comment to the trigger pull request.
+<details close>
+<summary>CircleCI</summary>
+<br>
 
 ```python
 import os
@@ -141,3 +153,6 @@ with open("./file.md", "r") as file:
 
 pull_request.post_comment(content)
 ```
+
+</details>
+<br>

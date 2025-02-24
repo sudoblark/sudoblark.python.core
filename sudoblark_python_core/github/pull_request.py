@@ -37,6 +37,15 @@ class PullRequest:
     repo: str
     state: PullRequestState
 
+    def get_comments(self):
+        pass
+
+    def get_comment(self):
+        pass
+
+    def post_comment(self):
+        pass
+
     def __str__(self) -> str:
         """
         Returns:
