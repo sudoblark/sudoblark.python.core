@@ -18,7 +18,8 @@ nav:
   - "Known Interfaces":
       - "GitHub":
         - "Client": 'known-interfaces/github/client.md'
-        - "Organisation":  'known-interfaces/github/organisation.md'
+        - "Organisation": 'known-interfaces/github/organisation.md'
+        - "Repository": 'known-interfaces/github/repository.md'
 
 plugins:
 - mkdocstrings:

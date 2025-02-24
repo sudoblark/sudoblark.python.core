@@ -4,6 +4,7 @@ which is exported at the root of the project as GitHubClient.
 """
 from sudoblark_python_core.abstracts.restapi import IClient
 from sudoblark_python_core.github.organisation import Organisation
+from sudoblark_python_core.github.repository import Repository
 from typing import Union
 from typing import List
 
@@ -60,6 +61,36 @@ class Client(IClient):
         self.headers["X-GitHub-Api-Version"] = "2022-11-28"
         self.client.headers.update(self.headers)
 
+    def get_repository(self, owner: str, name: str) -> Union[Repository, None]:
+        """
+        Args:
+            name: The name of the repository we are querying for
+            owner: The owner of the repository we are querying for
+
+        Examples:
+            ```python
+            get_repository("othneildrew", "Best-README-Template")
+            ```
+
+        Returns:
+            Repository instance if found, else None
+        """
+        repository: Union[None, Repository] = None
+
+        github_restapi_request = self.client.get(
+            url=f"{self._get_base_url()}/repos/{owner}/{name}"
+        )
+        response_data = github_restapi_request.json()
+        if github_restapi_request.status_code == 200:
+            repository = Repository(
+                identifier=response_data["id"],
+                client=self.client,
+                base_url=response_data["url"],
+                full_name=response_data["full_name"],
+                private=response_data["private"],
+            )
+        return repository
+
     def get_organisations(self) -> List[Organisation]:
         """
         Examples:
@@ -68,7 +99,8 @@ class Client(IClient):
             ```
 
         Returns:
-            List of Organisations which `Client` has access to.
+            All Organisations within GitHub the instance may access, empty if none found
+            or instance otherwise doesn't have access or fails to query the RESTAPI.
         """
         organisations: List[Organisation] = []
         github_restapi_request = self.client.get(
@@ -109,7 +141,7 @@ class Client(IClient):
             response_data = github_restapi_request.json()
             organisation = Organisation(
                 identifier=response_data["id"],
-                company=response_data["name"],
+                company=response_data["login"],
                 repos_url=response_data["repos_url"],
                 client=self.client,
                 base_url=response_data["url"]

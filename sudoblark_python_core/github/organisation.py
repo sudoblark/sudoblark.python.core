@@ -1,5 +1,10 @@
 from dataclasses import dataclass
 from requests import Session
+from typing import List
+from typing import Union
+
+from sudoblark_python_core.github.repository import Repository
+
 
 @dataclass
 class Organisation:
@@ -12,8 +17,8 @@ class Organisation:
         company (str): The company associated with the organisation
         repos_url (str): RESTAPI endpoint for retrieval of repos in the organisation
         client (requests.Session): Session used to make requests to the RESTful API, intended
-                          to be passed in when instance is created via GitHubClient.get_organisation
-        base_url (str): Base URL we should use for querying this RESTAPI within the context of the organisation
+                          to be passed in when instance is created via Client
+        base_url (str): Base URL we should use for querying the RESTAPI within the context of the organisation
 
     """
     identifier: int
@@ -21,6 +26,66 @@ class Organisation:
     repos_url: str
     client: Session
     base_url: str
+
+    def get_repository(self, name: str) -> Union[Repository, None]:
+        """
+        Args:
+            name: The name of the repository we are querying for
+
+        Examples:
+            ```python
+            get_repository('sudoblark.python.core')
+            ```
+
+        Returns:
+            Repository instance if found, else None
+        """
+        repository: Union[None, Repository] = None
+
+        base_github_api_url = self.base_url.split("/orgs")[0]
+
+        github_restapi_request = self.client.get(
+            url=f"{base_github_api_url}/repos/{self.company}/{name}"
+        )
+        response_data = github_restapi_request.json()
+        if github_restapi_request.status_code == 200:
+            repository = Repository(
+                identifier=response_data["id"],
+                client=self.client,
+                base_url=response_data["url"],
+                full_name=response_data["full_name"],
+                private=response_data["private"],
+            )
+        return repository
+
+    def get_repositories(self) -> List[Repository]:
+        """
+        Examples:
+            ```python
+            get_repositories()
+            ```
+
+        Returns:
+            All repositories within the organisation, empty if none found \
+            or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
+        """
+        repositories: List[Repository] = []
+        github_restapi_request = self.client.get(
+            url=f"{self.base_url}/repos"
+        )
+        if github_restapi_request.status_code == 200:
+            for repository in github_restapi_request.json():
+                repositories.append(
+                    Repository(
+                        identifier=repository["id"],
+                        client=self.client,
+                        base_url=repository["url"],
+                        full_name=repository["full_name"],
+                        private=repository["private"],
+
+                    )
+                )
+        return repositories
 
     def __str__(self) -> str:
         """
