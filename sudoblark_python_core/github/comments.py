@@ -68,7 +68,7 @@ class Comment:
             url=self.base_url,
             data=json.dumps({"body": body}),
         )
-        if github_restapi_request.status_code == 201:
+        if github_restapi_request.status_code == 200:
             response_data: dict = github_restapi_request.json()
             self.body = response_data["body"]
             self.author = response_data["user"]["login"]
@@ -85,7 +85,7 @@ class Comment:
         github_restapi_request: Response = self.client.delete(
             url=self.base_url
         )
-        if github_restapi_request.status_code == 201:
+        if github_restapi_request.status_code == 204:
             deleted = True
         return deleted
 

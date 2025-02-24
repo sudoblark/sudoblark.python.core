@@ -1,6 +1,6 @@
-Feature: Repository interaction
+Feature: Pull request interaction
 
-  Scenario Outline: Retrieve repositories
+  Scenario Outline: Retrieve pull requests
       Given the repository of "<repo>"
       When we use the core library to query for all pull requests
       Then the response should not be None or empty
