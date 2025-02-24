@@ -23,6 +23,7 @@ class Comment:
         issue (bool): If this comment is associated with an issue
         body (str): The body of the comment
     """
+
     identifier: int
     client: Session
     base_url: str
@@ -82,9 +83,7 @@ class Comment:
         """
         deleted: bool = False
 
-        github_restapi_request: Response = self.client.delete(
-            url=self.base_url
-        )
+        github_restapi_request: Response = self.client.delete(url=self.base_url)
         if github_restapi_request.status_code == 204:
             deleted = True
         return deleted

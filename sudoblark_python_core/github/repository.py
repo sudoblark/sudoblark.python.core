@@ -6,6 +6,7 @@ from sudoblark_python_core.github.pull_request import PullRequestState
 from typing import List
 from typing import Union
 
+
 @dataclass
 class Repository:
     """This class represents aa Repository within GitHub.
@@ -20,6 +21,7 @@ class Repository:
         full_name (str): Full name of the Repository, in the form of owner/repository
         private (bool): True if the Repository is private, else False
     """
+
     identifier: int
     client: Session
     base_url: str
@@ -76,9 +78,7 @@ class Repository:
         """
         pull_request: Union[None, PullRequest] = None
 
-        github_restapi_request: Response = self.client.get(
-            url=f"{self.base_url}/pulls/{identifier}"
-        )
+        github_restapi_request: Response = self.client.get(url=f"{self.base_url}/pulls/{identifier}")
         if github_restapi_request.status_code == 200:
             response_data: dict = github_restapi_request.json()
             pull_request = PullRequest(

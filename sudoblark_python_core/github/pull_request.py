@@ -16,6 +16,7 @@ class PullRequestState(enum.Enum):
         closed (str): Closed pull request
         all (str): Any pull request
     """
+
     open = "open"
     closed = "closed"
     all = "all"
@@ -37,6 +38,7 @@ class PullRequest:
         repo (str): Name of the Repository which the instance is associated with
         state (PullRequestState): State of the pull request
     """
+
     identifier: int
     number: int
     client: Session

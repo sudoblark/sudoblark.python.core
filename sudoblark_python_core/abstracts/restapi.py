@@ -4,7 +4,6 @@ This module is responsible for defining base abstract classes for interacting wi
 
 import logging
 import os
-import sys
 
 # Native modules
 from abc import ABC, abstractmethod
@@ -139,7 +138,9 @@ class IClient(ABC):
             bool: True if we can authenticate with the RESTAPI, False otherwise.
         """
         connected: bool = False
-        auth_request: requests.Response = requests.get(url=f"{self._get_base_url()}{self._get_auth_endpoint()}", headers=self.headers, timeout=10)
+        auth_request: requests.Response = requests.get(
+            url=f"{self._get_base_url()}{self._get_auth_endpoint()}", headers=self.headers, timeout=10
+        )
 
         if auth_request.status_code == 200:
             # Lazy logging so we interpolate only if message is actually omitted

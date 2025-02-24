@@ -22,6 +22,7 @@ class Organisation:
         base_url (str): Base URL we should use for querying the RESTAPI within the context of the organisation
 
     """
+
     identifier: int
     company: str
     repos_url: str
@@ -45,9 +46,7 @@ class Organisation:
 
         base_github_api_url: str = self.base_url.split("/orgs")[0]
 
-        github_restapi_request: Response = self.client.get(
-            url=f"{base_github_api_url}/repos/{self.company}/{name}"
-        )
+        github_restapi_request: Response = self.client.get(url=f"{base_github_api_url}/repos/{self.company}/{name}")
         if github_restapi_request.status_code == 200:
             response_data: dict = github_restapi_request.json()
             repository = Repository(
@@ -71,9 +70,7 @@ class Organisation:
             or instance otherwise doesn't have access to, or fails to query, the RESTAPI.
         """
         repositories: List[Repository] = []
-        github_restapi_request: Response = self.client.get(
-            url=f"{self.base_url}/repos"
-        )
+        github_restapi_request: Response = self.client.get(url=f"{self.base_url}/repos")
         if github_restapi_request.status_code == 200:
             response_data: dict = github_restapi_request.json()
             for repository in response_data:
@@ -84,7 +81,6 @@ class Organisation:
                         base_url=repository["url"],
                         full_name=repository["full_name"],
                         private=repository["private"],
-
                     )
                 )
         return repositories
@@ -114,6 +110,3 @@ class Organisation:
         if not isinstance(other, type(self)):
             return False
         return self.identifier == other.identifier
-
-
-
