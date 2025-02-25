@@ -54,6 +54,7 @@ jobs:
           git config user.email enquires@sudoblark.com
           
           poetry run mike deploy ${RELEASE_TAG_VERSION} --push
+          poetry run mike delete latest --push
           poetry run mike alias ${RELEASE_TAG_VERSION} latest --push
           poetry run mike set-default latest --push
         env:
