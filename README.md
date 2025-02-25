@@ -37,7 +37,6 @@
     <li><a href="#usage">Usage</a></li>
     <li><a href="#technical-documentation">Technical Documentation</a></li>
     <li><a href="#testing">Testing</a></li>
-    <li><a href="#packaging">Packaging</a></li>
     <li><a href="#cicd">CI/CD</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -50,7 +49,7 @@
 This is the core Python library for Sudoblark, mainly used to power CLI tooling
 to augment CI/CD operations.
 
-The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/). It
+The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/1.0.0). It
 is recommended for developers to at least read the "Developers notes" section
 before attempting to contribute to this repo.
 
@@ -68,6 +67,7 @@ before attempting to contribute to this repo.
   * [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 * Documentation
   * [mkdocstrings-python](https://mkdocstrings.github.io/python/)
+  * [mike](https://pypi.org/project/mike/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,13 +118,13 @@ help(sudoblark_python_core)
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Intall from PyPi:
+Install from PyPi:
 
 ```shell
 pip install sudoblark-python-core
 ```
 
-And off you go. More details are available [here](https://sudoblark.github.io/sudoblark.python.core/).
+And off you go. More details are available via the live documentation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,8 +141,8 @@ In order to generation a local web server of documentation:
 mkdocs serve
 ```
 
-However, it should be noted that live versioned documentation is produced during
-the release process by an admin running the `mkdocs gh-deploy --force` command.
+However, it should be noted that live versioned documentation is produced via
+the appropriate workflow as per the CI/CD section of this document.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -163,28 +163,16 @@ Checks may be run by simply executing `behave` locally once the `Installation` s
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- Packaging -->
-## Packaging
-
-The package is published to PyPi simply by running the below commands:
-
-```shell
-poetry build
-poetry config pypi-token.pypi <token>
-poetry publish
-```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 <!-- CI/CD -->
 ## CI/CD
 
 GitHub Actions is used for all CI/CD activities. We give a brief outline of what
 each pipeline does below.
 
-| Pipeline                    | Triggers                 | Description                       |
-|-----------------------------|--------------------------|-----------------------------------|
-| commit-to-pull-request.yaml | Commit on a pull request | Runs flake8 and behavioural tests |
+| Pipeline                    | Triggers                    | Description                                |
+|-----------------------------|-----------------------------|--------------------------------------------|
+| commit-to-pull-request.yaml | Commit on a pull request    | Runs behavioural tests                     |
+| release.yaml                | When a release is published | Builds and publishes docs and pypi package |
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

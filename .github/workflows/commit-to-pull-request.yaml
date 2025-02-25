@@ -1,0 +1,38 @@
+name: Python quality checks on pull request
+
+env:
+  # Automatically generated token unique to this repo per workflow execution
+  REPO_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # Explicitly provided token in ORG to access entire organisation
+  ORG_GITHUB_TOKEN: ${{ secrets.SUDOBLARK_GITHUB_TOKEN }}
+
+on: [pull_request]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  behave_checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        env:
+          GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.10.16
+
+      - name: Install poetry
+        run: |
+          pip install -U pip setuptools
+          pip install poetry
+        shell: bash
+
+      - name: Run behave
+        run: |
+          poetry install
+          poetry run behave
+        env:
+          GITHUB_TOKEN: ${{ env.ORG_GITHUB_TOKEN }}
+        shell: bash

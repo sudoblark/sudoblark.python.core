@@ -1,14 +1,21 @@
 site_name: The core Python library for Sudoblark
-repo_name: sudoblark/sudoblark_python_core
-site_url: https://github.com/sudoblark/sudoblark.python.core
+repo_url: https://github.com/sudoblark/sudoblark.python.core
+repo_name: sudoblark/sudoblark.python.core
+site_url: https://sudoblark.github.io/sudoblark.python.core/
 site_author: Benjamin Clark
 site_description: ->
-  This is the core Python library for Sudoblark, mainly used to power [magpie]() - a CLI tooling
-  intended to augment CI/CD operations.
+  The core Python library for Sudoblark, mainly used to power CLI tooling to augment CI/CD operations.
 copyright: BSD-3
 site_dir: site
 docs_dir: docs
-theme: readthedocs
+theme:
+  name: material
+  icon:
+    repo: fontawesome/brands/git-alt
+
+extra:
+  version:
+    provider: mike
 nav:
   - "Home": 'index.md'
   - "Usage": 'usage.md'
