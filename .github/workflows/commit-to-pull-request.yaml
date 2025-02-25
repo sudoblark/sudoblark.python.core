@@ -17,10 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        env:
+          GITHUB_TOKEN: REPO_GITHUB_TOKEN
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: 3.7.4
+          python-version: 3.10
           architecture: x64
       - name: Install flake8
         run: pip install flake8
@@ -35,11 +37,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
         env:
           GITHUB_TOKEN: REPO_GITHUB_TOKEN
+      - uses: actions/setup-python@v5
         with:
-          python-version: 3.10.0
+          python-version: 3.10
       - name: Setup venv
         run: |
           python3 -m venv venv
