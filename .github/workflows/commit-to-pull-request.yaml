@@ -50,9 +50,8 @@ jobs:
 
       - name: Run behave
         run: |
-          printenv
           poetry install
           poetry run behave
         env:
-          GITHUB_TOKEN: ${{ env.ORG_GITHUB_REPO }}
+          GITHUB_TOKEN: ${{ env.ORG_GITHUB_TOKEN }}
         shell: bash
