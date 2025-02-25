@@ -24,6 +24,8 @@ behave = {version = "^1.2.6"}
 
 [tool.poetry.group. documentation.dependencies]
 mkdocstrings-python = { version = "^1.16.1" }
+mkdocs-material = "^9.6.5"
+mike = "^2.1.3"
 
 [build-system]
 requires = ["poetry-core"]
