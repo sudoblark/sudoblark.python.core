@@ -50,6 +50,7 @@ jobs:
 
       - name: Run behave
         run: |
+          printenv
           poetry install
           poetry run behave
         env:
