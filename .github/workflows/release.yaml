@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          fetch-tags: true
+
         env:
           GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
       - uses: actions/setup-python@v1
@@ -46,8 +50,12 @@ jobs:
           source venv/bin/activate
           poetry install
           
+          git config user.name sudoblark-bot
+          git config user.email enquires@sudoblark.com
+          
           poetry run mike deploy ${RELEASE_TAG_VERSION} --push
-          poetry run mike set-default ${RELEASE_TAG_VERSION} --push
+          poetry run mike alias ${RELEASE_TAG_VERSION} latest --push
+          poetry run mike set-default latest --push
         env:
           GITHUB_TOKEN: ${{ env.ORG_GITHUB_TOKEN }}
         shell: bash
