@@ -41,21 +41,16 @@ jobs:
       - uses: actions/setup-python@v1
         with:
           python-version: 3.10.16
-      - name: Setup venv
-        run: |
-          python3 -m venv venv
-        shell: bash
 
       - name: Install poetry
         run: |
-          source venv/bin/activate
           pip install -U pip setuptools
           pip install poetry
         shell: bash
 
       - name: Run behave
         run: |
-          source venv/bin/activate
+          poetry install
           poetry run behave
         env:
           GITHUB_TOKEN: ORG_GITHUB_TOKEN
