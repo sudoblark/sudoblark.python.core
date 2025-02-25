@@ -49,7 +49,7 @@
 This is the core Python library for Sudoblark, mainly used to power CLI tooling
 to augment CI/CD operations.
 
-The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/). It
+The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/1.0.0). It
 is recommended for developers to at least read the "Developers notes" section
 before attempting to contribute to this repo.
 
@@ -67,6 +67,7 @@ before attempting to contribute to this repo.
   * [pyproject.toml](https://packaging.python.org/en/latest/guides/writing-pyproject-toml/)
 * Documentation
   * [mkdocstrings-python](https://mkdocstrings.github.io/python/)
+  * [mike](https://pypi.org/project/mike/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -117,13 +118,13 @@ help(sudoblark_python_core)
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Intall from PyPi:
+Install from PyPi:
 
 ```shell
 pip install sudoblark-python-core
 ```
 
-And off you go. More details are available [here](https://sudoblark.github.io/sudoblark.python.core/).
+And off you go. More details are available via the live documentation.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -1,12 +1,12 @@
 [tool.poetry]
 name = "sudoblark-python-core"
-version = "1.0.0"
+version = "1.0.1"
 description = 'Core python library for Sudoblark.'
 license = "BSD-3"
 authors = [
     "Ben Clark <bclark@sudoblark.com>"
 ]
-readme = 'README.md'
+readme = './docs/pypi_readme.md'
 repository  = 'https://github.com/sudoblark/sudoblark.python.core'
 classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules"
