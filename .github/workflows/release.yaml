@@ -50,7 +50,7 @@ jobs:
           poetry run mike set-default ${RELEASE_TAG_VERSION} --push
         env:
           GITHUB_TOKEN: ORG_GITHUB_TOKEN
-          shell: bash
+        shell: bash
 
   publish_package_to_pypi:
     runs-on: ubuntu-latest

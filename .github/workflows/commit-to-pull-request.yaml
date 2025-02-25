@@ -56,7 +56,7 @@ jobs:
       - name: Run behave
         run: |
           source venv/bin/activate
-          behave
+          poetry run behave
         env:
           GITHUB_TOKEN: ORG_GITHUB_TOKEN
         shell: bash
