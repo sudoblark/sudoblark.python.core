@@ -1,4 +1,4 @@
-name: Python quality checks on pull request
+name: Release artefacts to the wild
 
 env:
   # Automatically generated token unique to this repo per workflow execution
