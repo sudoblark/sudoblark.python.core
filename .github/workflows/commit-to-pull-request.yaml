@@ -53,5 +53,5 @@ jobs:
           poetry install
           poetry run behave
         env:
-          GITHUB_TOKEN: ORG_GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ env.ORG_GITHUB_REPO }}
         shell: bash
