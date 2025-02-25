@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sudoblark-python-core"
-version = "1.0.1"
+version = "1.0.2"
 description = 'Core python library for Sudoblark.'
 license = "BSD-3"
 authors = [
