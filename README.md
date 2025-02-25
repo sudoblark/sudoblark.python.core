@@ -49,7 +49,7 @@
 This is the core Python library for Sudoblark, mainly used to power CLI tooling
 to augment CI/CD operations.
 
-The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/1.0.0). It
+The live source of documentation may be said to reside [here](https://sudoblark.github.io/sudoblark.python.core/latest). It
 is recommended for developers to at least read the "Developers notes" section
 before attempting to contribute to this repo.
 
