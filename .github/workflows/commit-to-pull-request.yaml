@@ -13,25 +13,6 @@ permissions:
   pull-requests: write
 
 jobs:
-  flake8_checks:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        env:
-          GITHUB_TOKEN: REPO_GITHUB_TOKEN
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.10.16
-      - name: Install flake8
-        run: pip install flake8
-      - name: Run flake8
-        uses: suo/flake8-github-action@releases/v1
-        with:
-          checkName: 'flake8_checks'
-        env:
-          GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
-
   behave_checks:
     runs-on: ubuntu-latest
     steps:

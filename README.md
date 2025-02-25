@@ -171,7 +171,7 @@ each pipeline does below.
 
 | Pipeline                    | Triggers                    | Description                                |
 |-----------------------------|-----------------------------|--------------------------------------------|
-| commit-to-pull-request.yaml | Commit on a pull request    | Runs flake8 and behavioural tests          |
+| commit-to-pull-request.yaml | Commit on a pull request    | Runs behavioural tests                     |
 | release.yaml                | When a release is published | Builds and publishes docs and pypi package |
 
 

@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         env:
-          GITHUB_TOKEN: REPO_GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ env.REPO_GITHUB_TOKEN }}
       - uses: actions/setup-python@v1
         with:
           python-version: 3.10.16
@@ -49,7 +49,7 @@ jobs:
           poetry run mike deploy ${RELEASE_TAG_VERSION} --push
           poetry run mike set-default ${RELEASE_TAG_VERSION} --push
         env:
-          GITHUB_TOKEN: ORG_GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ env.ORG_GITHUB_TOKEN }}
         shell: bash
 
   publish_package_to_pypi:
