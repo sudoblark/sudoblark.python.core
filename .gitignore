@@ -232,6 +232,3 @@ terraform.rc
 
 # Temp dev files
 dev_scratchpad/*
-
-# Mkdocs HTML output
-site/
