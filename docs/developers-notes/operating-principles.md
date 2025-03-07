@@ -16,20 +16,6 @@ The above may, thus, be distilled in to
 client.get_object(<identifier>).update(<value>)
 ```
 
-This does violate the Law of Demeter, and can
-lead to a chain of `getter` methods. 
-
-However, the library intends to wrap primarily around 
-RESTAPIs, wherein object hierarchy is inherently nested. It also
-allows for method chaining across certain class structures.
-
-Furthermore, as we anticipate that users may want to perform actions
-at _any point_ in the hierarchy keeping all of this in a single
-interface will lead to quite a bit of bloat in our single class.
-
-The primary user interface is also intended to be CLI tooling that sits
-on top of the library, wherein we may abstract away such complexities.
-
 For example, with GitHub this is how we are able to chain
 objects to add a comment on a pull request for a personal repo:
 
