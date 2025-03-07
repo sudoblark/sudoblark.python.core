@@ -658,16 +658,6 @@ or may not have objects of its own we intend to interact with</li>
 <p>The above may, thus, be distilled in to</p>
 <pre><code class="language-python">client.get_object(&lt;identifier&gt;).update(&lt;value&gt;)
 </code></pre>
-<p>This does violate the Law of Demeter, and can
-lead to a chain of <code>getter</code> methods. </p>
-<p>However, the library intends to wrap primarily around 
-RESTAPIs, wherein object hierarchy is inherently nested. It also
-allows for method chaining across certain class structures.</p>
-<p>Furthermore, as we anticipate that users may want to perform actions
-at <em>any point</em> in the hierarchy keeping all of this in a single
-interface will lead to quite a bit of bloat in our single class.</p>
-<p>The primary user interface is also intended to be CLI tooling that sits
-on top of the library, wherein we may abstract away such complexities.</p>
 <p>For example, with GitHub this is how we are able to chain
 objects to add a comment on a pull request for a personal repo:</p>
 <p><img alt="GitHub Example" src="../github-example.png" /></p>
