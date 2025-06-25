@@ -45,6 +45,11 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+[![Docs](https://img.shields.io/badge/docs-latest-blue?logo=readthedocs)](https://sudoblark.github.io/sudoblark.python.core/latest/)
+[![PyPI Version](https://img.shields.io/pypi/v/sudoblark-python-core)](https://pypi.org/project/sudoblark-python-core/)
+[![CI](https://github.com/sudoblark/sudoblark.python.core/actions/workflows/commit-to-pull-request.yaml/badge.svg)](https://github.com/sudoblark/sudoblark.python.core/actions/workflows/commit-to-pull-request.yaml)
+[![Python Version](https://img.shields.io/pypi/pyversions/sudoblark-python-core)](https://pypi.org/project/sudoblark-python-core/)
+[![License](https://img.shields.io/github/license/sudoblark/sudoblark.python.core)](https://github.com/sudoblark/sudoblark.python.core/blob/main/LICENSE.txt)
 
 This is the core Python library for Sudoblark, mainly used to power CLI tooling
 to augment CI/CD operations.
